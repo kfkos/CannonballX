@@ -107,7 +107,9 @@ void Menu::populate_for_pc()
     menu_main.push_back(ENTRY_GAMEMODES);
     menu_main.push_back(ENTRY_SETTINGS);
     menu_main.push_back(ENTRY_ABOUT);
+#ifndef _XBOX
     menu_main.push_back(ENTRY_EXIT);
+#endif
 #ifndef _XBOX
     menu_gamemodes.push_back(ENTRY_ENHANCED);
     menu_gamemodes.push_back(ENTRY_ORIGINAL);
