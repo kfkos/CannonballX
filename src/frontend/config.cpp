@@ -114,7 +114,7 @@ void Config::load()
     video.scale      = pt_config.get("video.window.scale",       2); // Video Scale: Default is 2x    
     video.scanlines  = pt_config.get("video.scanlines",          0); // Scanlines
     video.fps        = pt_config.get("video.fps",                0); // XBOX: Default 30 FPS
-    video.fps_count  = pt_config.get("video.fps_counter",        1); // FPS Counter
+    video.fps_count  = pt_config.get("video.fps_counter",        0); // FPS Counter
     video.widescreen = pt_config.get("video.widescreen",         0); // Enable Widescreen Mode
     video.hires      = pt_config.get("video.hires",              0); // Hi-Resolution Mode
     video.filtering  = pt_config.get("video.filtering",          0); // Open GL Filtering Mode
