@@ -1,9 +1,10 @@
 Microsoft Visual Studio Solution File, Format Version 8.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CannonballX", "CannonballX.vcproj", "{5F9CD5B5-1077-453B-AE11-8FAB3770C5E3}"
 	ProjectSection(ProjectDependencies) = postProject
+		{7C481C7D-ECA7-4F9E-879C-105784F3543D} = {7C481C7D-ECA7-4F9E-879C-105784F3543D}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libSDL2x", "..\libs\libSDL2x\libSDL2x.vcproj", "{7C481C7D-ECA7-4F9E-879C-105784F3543D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libSDL2x", "libs\libSDL2x\libSDL2x.vcproj", "{7C481C7D-ECA7-4F9E-879C-105784F3543D}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject

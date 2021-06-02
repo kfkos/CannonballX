@@ -1,5 +1,7 @@
 Debug/
 Release/
 cmake/
+libs/libSDL2x
+libs/boost_1_41_0
 CannonballX.ncb
 CannonballX.suo
