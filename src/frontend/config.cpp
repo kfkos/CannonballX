@@ -32,11 +32,13 @@ typedef boost::property_tree::xml_writer_settings<std::string> xml_writer_settin
 typedef boost::property_tree::xml_writer_settings<char> xml_writer_settings;
 #endif
 
+#include "tinyxml.h"
+
 Config config;
 
 Config::Config(void)
 {
-    data.cfg_file = "./config.xml";
+    data.cfg_file = "config.xml";
     
     // Setup default sounds
     music_t magical, breeze, splash;
@@ -75,9 +77,8 @@ void Config::load()
     // No namespace qualification is needed, because of Koenig 
     // lookup on the second argument. If reading fails, exception
     // is thrown.
-    try
-    {
-        read_xml(data.cfg_file, pt_config, boost::property_tree::xml_parser::trim_whitespace);
+	try {
+		read_xml("D:\\res\\config.xml", pt_config, boost::property_tree::xml_parser::trim_whitespace);
     }
     catch (std::exception &e)
     {
@@ -90,7 +91,6 @@ void Config::load()
     data.rom_path         = pt_config.get("data.rompath", "roms");  // Path to ROMs
     data.res_path         = pt_config.get("data.respath", "res\\");   // Path to ROMs
     data.save_path        = pt_config.get("data.savepath", ".");    // Path to Save Data
-    data.crc32            = pt_config.get("data.crc32", 1);
 
     data.file_scores      = data.save_path + "hiscores.xml";
     data.file_scores_jap  = data.save_path + "hiscores_jap.xml";
@@ -110,13 +110,13 @@ void Config::load()
     // Video Settings
     // ------------------------------------------------------------------------
    
-    video.mode       = pt_config.get("video.mode",               2); // Video Mode: Default is Full Screen 
-    video.scale      = pt_config.get("video.window.scale",       2); // Video Scale: Default is 2x    
+	video.mode		 = 2;											 // Override Video Mode permanently to Full Screen
+    video.scale      = 2;											 // Override Video Scale: Default is 2x    
     video.scanlines  = pt_config.get("video.scanlines",          0); // Scanlines
-    video.fps        = pt_config.get("video.fps",                0); // XBOX: Default 30 FPS
+    video.fps        = 0;											 // Override FPS permanently to 30
     video.fps_count  = pt_config.get("video.fps_counter",        0); // FPS Counter
-    video.widescreen = pt_config.get("video.widescreen",         0); // Enable Widescreen Mode
-    video.hires      = pt_config.get("video.hires",              0); // Hi-Resolution Mode
+    video.widescreen = 0;											 // Permanently disable Widescreen
+    video.hires      = 0;											 // Permanently disable Hi-Resolution Mode (perfomance problems)
     video.filtering  = pt_config.get("video.filtering",          0); // Open GL Filtering Mode
     video.vsync      = pt_config.get("video.vsync",              1); // Use V-Sync where available (e.g. Open GL)
     video.shadow     = pt_config.get("video.shadow",             0); // Shadow Settings
@@ -128,11 +128,12 @@ void Config::load()
     sound.rate        = pt_config.get("sound.rate",        44100);
     sound.advertise   = pt_config.get("sound.advertise",   1);
     sound.preview     = pt_config.get("sound.preview",     1);
-    sound.fix_samples = pt_config.get("sound.fix_samples", 1);
+    sound.fix_samples = pt_config.get("sound.fix_samples", 0);
     sound.music_timer = pt_config.get("sound.music_timer", 0);
 
     // Custom Music. Search for enabled custom tracks
-	/* kfkos:
+#ifndef _XBOX
+	// TO-DO (kfkos): disable custom music for now, not a priority
     for (int i = 0;; i++)
     {
         std::string xmltag = "sound.custom_music.track" + Utils::to_string(i + 1);
@@ -149,7 +150,7 @@ void Config::load()
             sound.music.push_back(music);
         }
     }
-	*/
+#endif
 
     if (!sound.music_timer)
         sound.music_timer = MUSIC_TIMER;
