@@ -2,6 +2,7 @@
 This is a port of the Cannonball - OutRun Engine to the original XBox
 ## TO-DO
 - Implement saving and loading from config.xml
+- Better error handling in case of missing files
 - Controller remapping support
 - Figure out why triggers are seen as digital buttons
 - Port custom music feature
